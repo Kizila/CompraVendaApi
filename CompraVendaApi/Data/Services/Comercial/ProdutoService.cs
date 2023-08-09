@@ -75,15 +75,41 @@ namespace CompraVendaApi.Data.Services
         {
             return await context.Produtos.Where(x => x.codigo_barra == code).ToListAsync();
         }
-        public async Task<List<Produto>> GetByFiltrosAsync(string code, string descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id)
+        public async Task<dynamic> GetByFiltrosAsync(string code, string descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id)
         {
-            var request = context.Produtos.AsQueryable();
+            var request = context.Produtos.Select(t => new
+            {
+                t.product_id,
+                t.codigo,
+                t.codigo_barra,
+                t.descricao,
+                t.imposto_id,
+                imposto = t.Imposto.percentagem,
+                t.marca_id,
+                marca = t.Marca.titulo,
+                t.categoria_id,
+                categoria = t.Categoria.titulo,
+                t.apresentacao_id,
+                apresentacao = t.Apresentacao.titulo,
+                t.preco,
+                t.preco_custo,
+                t.bundle,
+                t.controla_serial_no,
+                t.move_stock,
+                t.tipo_artigo,
+                t.criado_user,
+                t.criado_data,
+                t.atualizado_user,
+                t.atualizado_data,
+                t.activo,
+                t.apagado
+            }).AsQueryable();
 
             if (!String.IsNullOrEmpty(code) && !String.IsNullOrWhiteSpace(code))
-                request = request.Where(x => x.codigo_barra == code);
+                request = request.Where(x => x.codigo.Contains(code));
 
             if (!String.IsNullOrEmpty(descricao) && !String.IsNullOrWhiteSpace(descricao))
-                request = request.Where(x => x.descricao == descricao);
+                request = request.Where(x => x.descricao.Contains(descricao));
 
             if (categoria_id != null && categoria_id != 0)
                 request = request.Where(x => x.categoria_id == categoria_id);

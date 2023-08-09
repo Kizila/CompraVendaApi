@@ -20,7 +20,7 @@ namespace CompraVendaApi.Data.Services
 
         Task<List<ProdutoBundle>> GetBundleMostrarByProductIDAsync(int id);
 
-        Task<List<Produto>> GetByFiltrosAsync(string code,string descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id);
+        Task<dynamic> GetByFiltrosAsync(string code,string descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id);
 
         Task<Produto> Save(Produto item);
 

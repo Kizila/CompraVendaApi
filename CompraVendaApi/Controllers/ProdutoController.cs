@@ -64,9 +64,9 @@ namespace CompraVendaApi.Controllers
         }
         [HttpGet]
         [Route("MostrarFilter")]
-        public async Task<ContentResult> MostrarFilter(string code, string descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id)
+        public async Task<ContentResult> MostrarFilter(string? codigo, string? descricao, Nullable<int> categoria_id, Nullable<int> apresentacao_id, Nullable<int> marca_id)
         {
-            var data = await service.GetByFiltrosAsync(code,descricao,categoria_id,apresentacao_id,marca_id);
+            var data = await service.GetByFiltrosAsync(codigo, descricao, categoria_id, apresentacao_id, marca_id);
 
             return Content(JsonConvert.SerializeObject(data), "application/json");
         }
