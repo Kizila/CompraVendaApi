@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompraVendaApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220809102754_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20230809102741_InititalDB")]
+    partial class InititalDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,11 +299,11 @@ namespace CompraVendaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_id"), 1L, 1);
 
-                    b.Property<byte>("activo")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
 
-                    b.Property<byte>("apagado")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("apresentacao_id")
                         .HasColumnType("int");

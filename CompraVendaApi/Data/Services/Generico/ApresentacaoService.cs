@@ -49,7 +49,7 @@ namespace CompraVendaApi.Data.Services
             if (existing == null)
             {
 
-                throw new Exception($"Utilizador não encontrado ID {item.apresentacao_id} não foi encontrado no banco de dados!");
+                throw new Exception($"ID não encontrado  {item.apresentacao_id} na banco de dados!");
             }
 
 

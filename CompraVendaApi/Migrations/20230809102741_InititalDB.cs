@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CompraVendaApi.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class InititalDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -157,8 +157,8 @@ namespace CompraVendaApi.Migrations
                     criado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     atualizado_user = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     atualizado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    activo = table.Column<byte>(type: "tinyint", nullable: false),
-                    apagado = table.Column<byte>(type: "tinyint", nullable: false)
+                    activo = table.Column<bool>(type: "bit", nullable: false),
+                    apagado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
