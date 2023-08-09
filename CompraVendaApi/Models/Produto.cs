@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CompraVendaApi.Models
 {
@@ -16,21 +17,27 @@ namespace CompraVendaApi.Models
 
         public int imposto_id { get; set; }
 
-        public Imposto Imposto { get; set; }
+        [JsonIgnore]
+        public Imposto? Imposto { get; set; }
 
         public int marca_id { get; set; }
 
-        public Marca Marca { get; set; }
+        [JsonIgnore]
+        public Marca? Marca { get; set; } 
 
         public int categoria_id { get; set; }
 
-        public Categoria Categoria { get; set; }
+        [JsonIgnore]
+        public Categoria? Categoria { get; set; } 
 
         public int apresentacao_id { get; set; }
 
-        public Apresentacao Apresentacao { get; set; }
+        [JsonIgnore]
+        public Apresentacao? Apresentacao { get; set; } 
 
         public decimal preco { get; set; }
+
+        public decimal preco_custo { get; set; }
 
         public bool bundle { get; set; }
 
@@ -40,7 +47,7 @@ namespace CompraVendaApi.Models
 
         public bool tipo_artigo { get; set; }
 
-        public List<ProdutoBundle> product_bundle { get; set; } = new List<ProdutoBundle>();
+        public List<ProdutoBundle>? product_bundle { get; set; } 
 
         public string criado_user { get; set; }
 

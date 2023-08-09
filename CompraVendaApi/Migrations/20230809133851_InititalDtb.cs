@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CompraVendaApi.Migrations
 {
-    public partial class InititalDB : Migration
+    public partial class InititalDtb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -149,6 +149,7 @@ namespace CompraVendaApi.Migrations
                     categoria_id = table.Column<int>(type: "int", nullable: false),
                     apresentacao_id = table.Column<int>(type: "int", nullable: false),
                     preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    preco_custo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     bundle = table.Column<bool>(type: "bit", nullable: false),
                     controla_serial_no = table.Column<bool>(type: "bit", nullable: false),
                     move_stock = table.Column<bool>(type: "bit", nullable: false),

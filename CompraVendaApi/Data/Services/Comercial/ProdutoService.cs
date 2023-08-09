@@ -13,11 +13,39 @@ namespace CompraVendaApi.Data.Services
             this.context = context;
         }
 
-        public async Task<List<Produto>> GetAllAsync()
+        public async Task<dynamic> GetAllAsync()
         {
             try
             {
-                return await context.Produtos.ToListAsync();
+                var request = await context.Produtos.Select(t => new 
+                {
+                    t.product_id,
+                    t.codigo,
+                    t.codigo_barra,
+                    t.descricao,
+                    t.imposto_id,
+                    imposto = t.Imposto.percentagem,
+                    t.marca_id,
+                    marca = t.Marca.titulo,
+                    t.categoria_id,
+                    categoria = t.Categoria.titulo,
+                    t.apresentacao_id,
+                    apresentacao =  t.Apresentacao.titulo,
+                    t.preco,
+                    t.preco_custo,
+                    t.bundle,
+                    t.controla_serial_no,
+                    t.move_stock,
+                    t.tipo_artigo,
+                    t.criado_user,
+                    t.criado_data,
+                    t.atualizado_user,
+                    t.atualizado_data,
+                    t.activo,
+                    t.apagado
+                }).ToListAsync();
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -77,18 +105,32 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Produto> Save(Produto item)
         {
-            var NCategoria = new Produto();
-            NCategoria.descricao = item.descricao;
-            NCategoria.criado_user = item.criado_user;
-            NCategoria.criado_data = item.criado_data;
-            NCategoria.atualizado_user = item.atualizado_user;
-            NCategoria.atualizado_data = item.atualizado_data;
+            var NProduto = new Produto();
+            NProduto.codigo = item.codigo;
+            NProduto.codigo_barra = item.codigo_barra;
+            NProduto.descricao = item.descricao;
+            NProduto.imposto_id = item.imposto_id;
+            NProduto.marca_id = item.marca_id;
+            NProduto.categoria_id = item.categoria_id;
+            NProduto.apresentacao_id =  item.apresentacao_id;
+            NProduto.preco = item.preco;
+            NProduto.preco_custo = item.preco_custo;
+            NProduto.bundle = item.bundle;
+            NProduto.controla_serial_no = item.controla_serial_no;
+            NProduto.move_stock = item.move_stock;
+            NProduto.tipo_artigo = item.tipo_artigo;
+            NProduto.product_bundle = item.product_bundle;
+
+            NProduto.criado_user = item.criado_user;
+            NProduto.criado_data = item.criado_data;
+            NProduto.atualizado_user = item.atualizado_user;
+            NProduto.atualizado_data = item.atualizado_data;
             
-            context.Add(NCategoria);
+            context.Add(NProduto);
 
             await context.SaveChangesAsync();
 
-            return NCategoria;
+            return NProduto;
         }
 
         public async Task<Produto> Update(Produto item)

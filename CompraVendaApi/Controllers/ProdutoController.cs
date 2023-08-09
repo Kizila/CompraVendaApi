@@ -85,10 +85,16 @@ namespace CompraVendaApi.Controllers
         public async Task<IActionResult> Guardar(Produto item)
         {
             Stopwatch watch = Stopwatch.StartNew();
+            try
+            {
+                var data = await service.Save(item);
 
-            var data = await service.Save(item);
-
-            return await FuncToCreated(data, watch.ElapsedMilliseconds);
+                return await FuncToCreated(data, watch.ElapsedMilliseconds);
+            }
+            catch (Exception ex)
+            {
+                return FormatedError<Produto>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
+            }
         }
     }
 }

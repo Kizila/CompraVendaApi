@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CompraVendaApi.Models
 {
@@ -12,7 +13,8 @@ namespace CompraVendaApi.Models
 
         public int product_id { get; set; }
 
-        public Produto Produto { get; set; }
+        [JsonIgnore]
+        public Produto? Produto { get; set; }
 
         public string codigo_bundle { get; set; }
 

@@ -353,6 +353,9 @@ namespace CompraVendaApi.Migrations
                     b.Property<decimal>("preco")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("preco_custo")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("tipo_artigo")
                         .HasColumnType("bit");
 

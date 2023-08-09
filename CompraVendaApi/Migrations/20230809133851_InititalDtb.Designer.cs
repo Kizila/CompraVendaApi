@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompraVendaApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230809102741_InititalDB")]
-    partial class InititalDB
+    [Migration("20230809133851_InititalDtb")]
+    partial class InititalDtb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -353,6 +353,9 @@ namespace CompraVendaApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("preco")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("preco_custo")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("tipo_artigo")

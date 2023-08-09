@@ -6,7 +6,7 @@ namespace CompraVendaApi.Data.Services
     public interface IProdutoService
     {
 
-        Task<List<Produto>> GetAllAsync();
+        Task<dynamic> GetAllAsync();
 
         Task<List<Produto>> MostrarActivos();
 
