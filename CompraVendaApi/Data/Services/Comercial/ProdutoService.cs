@@ -125,7 +125,9 @@ namespace CompraVendaApi.Data.Services
             NProduto.criado_data = item.criado_data;
             NProduto.atualizado_user = item.atualizado_user;
             NProduto.atualizado_data = item.atualizado_data;
-            
+            NProduto.activo = true;
+            NProduto.apagado = false;
+
             context.Add(NProduto);
 
             await context.SaveChangesAsync();
@@ -135,14 +137,33 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Produto> Update(Produto item)
         {
-            var existing = await GetByIDAsync(item.apresentacao_id);
-            if (existing == null)
+            var NProduto = await GetByIDAsync(item.product_id);
+            if (NProduto == null)
             {
-                throw new Exception($"ID não encontrado  {item.apresentacao_id} na banco de dados!");
+                throw new Exception($"ID não encontrado  {item.product_id} na banco de dados!");
             }
 
+            NProduto.codigo = item.codigo;
+            NProduto.codigo_barra = item.codigo_barra;
+            NProduto.descricao = item.descricao;
+            NProduto.imposto_id = item.imposto_id;
+            NProduto.marca_id = item.marca_id;
+            NProduto.categoria_id = item.categoria_id;
+            NProduto.apresentacao_id = item.apresentacao_id;
+            NProduto.preco = item.preco;
+            NProduto.preco_custo = item.preco_custo;
+            NProduto.bundle = item.bundle;
+            NProduto.controla_serial_no = item.controla_serial_no;
+            NProduto.move_stock = item.move_stock;
+            NProduto.tipo_artigo = item.tipo_artigo;
+            NProduto.product_bundle = item.product_bundle;
+
+            NProduto.atualizado_user = item.atualizado_user;
+            NProduto.atualizado_data = item.atualizado_data;
+            NProduto.activo = item.activo;
 
             await context.SaveChangesAsync();
+
             return item;
         }
 
