@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace CompraVendaApi.Data.Services
@@ -28,18 +29,20 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Imposto> Save(Imposto item)
         {
-            var NCategoria = new Imposto();
-            NCategoria.descricao = item.descricao;
-            NCategoria.criado_user = item.criado_user;
-            NCategoria.criado_data = item.criado_data;
-            NCategoria.atualizado_user = item.atualizado_user;
-            NCategoria.atualizado_data = item.atualizado_data;
+            var newID = LastImposto() + 1;
+            var NImposto = new Imposto();
+            NImposto.imposto_id = newID;
+            NImposto.descricao = item.descricao;
+            NImposto.criado_user = item.criado_user;
+            NImposto.criado_data = item.criado_data;
+            NImposto.atualizado_user = item.atualizado_user;
+            NImposto.atualizado_data = item.atualizado_data;
             
-            context.Add(NCategoria);
+            context.Add(NImposto);
 
             await context.SaveChangesAsync();
 
-            return NCategoria;
+            return NImposto;
         }
 
         public async Task<Imposto> Update(Imposto item)
@@ -53,6 +56,21 @@ namespace CompraVendaApi.Data.Services
 
             await context.SaveChangesAsync();
             return item;
+        }
+
+
+        private int LastImposto()
+        {
+            string last = "";
+            try
+            {
+                last = context.Impostos.Select(t => t.imposto_id).ToList().AsEnumerable().Max().ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
         }
     }
 }

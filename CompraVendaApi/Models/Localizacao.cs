@@ -5,7 +5,7 @@ namespace CompraVendaApi.Models
 {
     public class Localizacao
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int localizacao_id { get; set; }
 
         public Nullable<int> localizacao_parent { get; set; }

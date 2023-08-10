@@ -25,10 +25,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Apresentacao", b =>
                 {
                     b.Property<int>("apresentacao_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("apresentacao_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -67,10 +64,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Armazem", b =>
                 {
                     b.Property<int>("armazem_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("armazem_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -114,10 +108,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Categoria", b =>
                 {
                     b.Property<int>("categoria_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("categoria_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -153,13 +144,58 @@ namespace CompraVendaApi.Migrations
                     b.ToTable("Categorias");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
+                {
+                    b.Property<int>("documento_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("atualizado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("atualizado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("criado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("criado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("designacao")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int?>("documento_parent_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("notas")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("documento_id");
+
+                    b.HasIndex("documento_parent_id");
+
+                    b.ToTable("Documentos");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.Imposto", b =>
                 {
                     b.Property<int>("imposto_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("imposto_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -203,10 +239,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Localizacao", b =>
                 {
                     b.Property<int>("localizacao_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("localizacao_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -251,10 +284,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Marca", b =>
                 {
                     b.Property<int>("marca_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("marca_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -292,10 +322,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Produto", b =>
                 {
                     b.Property<int>("product_id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_id"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -375,10 +402,7 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.ProdutoBundle", b =>
                 {
                     b.Property<int>("product_id_bundle")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("product_id_bundle"), 1L, 1);
 
                     b.Property<bool>("activo")
                         .HasColumnType("bit");
@@ -393,18 +417,10 @@ namespace CompraVendaApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("codigo_bundle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("criado_data")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("criado_user")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("descricao_bundle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -425,6 +441,15 @@ namespace CompraVendaApi.Migrations
                     b.HasIndex("product_id");
 
                     b.ToTable("ProdutoBundles");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
+                {
+                    b.HasOne("CompraVendaApi.Models.Documento", "documento_parent")
+                        .WithMany("documento_parents")
+                        .HasForeignKey("documento_parent_id");
+
+                    b.Navigation("documento_parent");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Produto", b =>
@@ -481,6 +506,11 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Categoria", b =>
                 {
                     b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
+                {
+                    b.Navigation("documento_parents");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Imposto", b =>

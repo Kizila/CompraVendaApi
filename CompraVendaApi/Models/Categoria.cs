@@ -5,7 +5,7 @@ namespace CompraVendaApi.Models
 {
     public class Categoria
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int categoria_id { get; set; }
 
         public string titulo { get; set; }

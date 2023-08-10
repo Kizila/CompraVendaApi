@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace CompraVendaApi.Data.Services
@@ -131,7 +132,15 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Produto> Save(Produto item)
         {
+            var newID = LastProduto() + 1;
             var NProduto = new Produto();
+
+            var newBundleID = LastProdutoBundle() + 1;
+
+            if(item.product_bundle != null)
+                item.product_bundle.ForEach(item => item.product_id_bundle = newBundleID++);
+
+            NProduto.product_id = newID;
             NProduto.codigo = item.codigo;
             NProduto.codigo_barra = item.codigo_barra;
             NProduto.descricao = item.descricao;
@@ -169,6 +178,14 @@ namespace CompraVendaApi.Data.Services
                 throw new Exception($"ID não encontrado  {item.product_id} na banco de dados!");
             }
 
+            var newBundleID = LastProdutoBundle() + 1;
+
+            if (item.product_bundle != null)
+                item.product_bundle.ForEach(item => {
+                    if (item.product_id_bundle == 0)
+                        item.product_id_bundle = newBundleID++; 
+                }) ;
+
             NProduto.codigo = item.codigo;
             NProduto.codigo_barra = item.codigo_barra;
             NProduto.descricao = item.descricao;
@@ -193,6 +210,32 @@ namespace CompraVendaApi.Data.Services
             return item;
         }
 
-      
+        private int LastProduto()
+        {
+            string last = "";
+            try
+            {
+                last = context.Produtos.Select(t => t.product_id).ToList().AsEnumerable().Max().ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
+        }
+        private int LastProdutoBundle()
+        {
+            string last = "";
+            try
+            {
+                last = context.ProdutoBundles.Select(t => t.product_id_bundle).ToList().AsEnumerable().Max().ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
+        }
+
     }
 }

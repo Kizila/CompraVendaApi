@@ -6,7 +6,7 @@ namespace CompraVendaApi.Models
 {
     public class ProdutoBundle
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int product_id_bundle { get; set; }
 
         public int product_id_bundle_include { get; set; }
@@ -15,10 +15,6 @@ namespace CompraVendaApi.Models
 
         [JsonIgnore]
         public Produto? Produto { get; set; }
-
-        public string codigo_bundle { get; set; }
-
-        public string descricao_bundle { get; set; }
 
         public decimal preco { get; set; }
 

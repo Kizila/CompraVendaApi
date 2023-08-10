@@ -26,6 +26,8 @@
   <ItemGroup>
     <Folder Include="Data\Base\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Models\Comercial\" />
+    <Folder Include="Models\Administracao\" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ namespace CompraVendaApi.Models
 {
     public class Imposto
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int imposto_id { get; set; }
 
         public string codigo { get; set; }

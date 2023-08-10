@@ -6,7 +6,7 @@ namespace CompraVendaApi.Models
 {
     public class Produto
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int product_id { get; set; }
 
         public string codigo { get; set; }

@@ -5,7 +5,7 @@ namespace CompraVendaApi.Models
 {
     public class Apresentacao
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int apresentacao_id { get; set; }
 
         public string titulo { get; set; }

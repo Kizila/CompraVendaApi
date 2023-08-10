@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace CompraVendaApi.Data.Services
@@ -28,11 +29,14 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Categoria> Save(Categoria item)
         {
+            var newID = LastCategoria() + 1;
             var NCategoria = new Categoria();
+            NCategoria.categoria_id = newID;
             NCategoria.titulo = item.titulo;
             NCategoria.descricao = item.descricao;
             NCategoria.criado_user = item.criado_user;
             NCategoria.criado_data = item.criado_data;
+            NCategoria.activo = true;
             NCategoria.atualizado_user = item.atualizado_user;
             NCategoria.atualizado_data = item.atualizado_data;
             
@@ -54,6 +58,20 @@ namespace CompraVendaApi.Data.Services
 
             await context.SaveChangesAsync();
             return item;
+        }
+
+        private int LastCategoria()
+        {
+            string last = "";
+            try
+            {
+                last = context.Categorias.Select(t => t.categoria_id).ToList().AsEnumerable().Max().ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
         }
     }
 }

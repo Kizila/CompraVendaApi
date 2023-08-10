@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace CompraVendaApi.Data.Services
@@ -28,19 +29,22 @@ namespace CompraVendaApi.Data.Services
 
         public async Task<Apresentacao> Save(Apresentacao item)
         {
-            var NCategoria = new Apresentacao();
-            NCategoria.titulo = item.titulo;
-            NCategoria.descricao = item.descricao;
-            NCategoria.criado_user = item.criado_user;
-            NCategoria.criado_data = item.criado_data;
-            NCategoria.atualizado_user = item.atualizado_user;
-            NCategoria.atualizado_data = item.atualizado_data;
+            var newID = LastApresentacao() +1;
+            var NApresentacao = new Apresentacao();
+            NApresentacao.apresentacao_id = newID;
+            NApresentacao.titulo = item.titulo;
+            NApresentacao.descricao = item.descricao;
+            NApresentacao.activo = true;
+            NApresentacao.criado_user = item.criado_user;
+            NApresentacao.criado_data = item.criado_data;
+            NApresentacao.atualizado_user = item.atualizado_user;
+            NApresentacao.atualizado_data = item.atualizado_data;
             
-            context.Add(NCategoria);
+            context.Add(NApresentacao);
 
             await context.SaveChangesAsync();
 
-            return NCategoria;
+            return NApresentacao;
         }
 
         public async Task<Apresentacao> Update(Apresentacao item)
@@ -55,6 +59,20 @@ namespace CompraVendaApi.Data.Services
 
             await context.SaveChangesAsync();
             return item;
+        }
+
+        private int LastApresentacao()
+        {
+            string last = "";
+            try
+            {
+                last = context.Apresentacaos.Select(t => t.apresentacao_id).ToList().AsEnumerable().Max().ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CompraVendaApi.Migrations
 {
-    public partial class InititalDtb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,7 @@ namespace CompraVendaApi.Migrations
                 name: "Apresentacaos",
                 columns: table => new
                 {
-                    apresentacao_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    apresentacao_id = table.Column<int>(type: "int", nullable: false),
                     titulo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     criado_user = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -33,8 +32,7 @@ namespace CompraVendaApi.Migrations
                 name: "Armazems",
                 columns: table => new
                 {
-                    armazem_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    armazem_id = table.Column<int>(type: "int", nullable: false),
                     codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ordem = table.Column<int>(type: "int", nullable: false),
@@ -55,8 +53,7 @@ namespace CompraVendaApi.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    categoria_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    categoria_id = table.Column<int>(type: "int", nullable: false),
                     titulo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     criado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -72,11 +69,36 @@ namespace CompraVendaApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Documentos",
+                columns: table => new
+                {
+                    documento_id = table.Column<int>(type: "int", nullable: false),
+                    documento_parent_id = table.Column<int>(type: "int", nullable: true),
+                    codigo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    designacao = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    notas = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    activo = table.Column<bool>(type: "bit", nullable: false),
+                    criado_user = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    criado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    atualizado_user = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    atualizado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    apagado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documentos", x => x.documento_id);
+                    table.ForeignKey(
+                        name: "FK_Documentos_Documentos_documento_parent_id",
+                        column: x => x.documento_parent_id,
+                        principalTable: "Documentos",
+                        principalColumn: "documento_id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Impostos",
                 columns: table => new
                 {
-                    imposto_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    imposto_id = table.Column<int>(type: "int", nullable: false),
                     codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     percentagem = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -97,8 +119,7 @@ namespace CompraVendaApi.Migrations
                 name: "Localizacaos",
                 columns: table => new
                 {
-                    localizacao_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    localizacao_id = table.Column<int>(type: "int", nullable: false),
                     localizacao_parent = table.Column<int>(type: "int", nullable: true),
                     codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -119,8 +140,7 @@ namespace CompraVendaApi.Migrations
                 name: "Marcas",
                 columns: table => new
                 {
-                    marca_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    marca_id = table.Column<int>(type: "int", nullable: false),
                     titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     criado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -139,8 +159,7 @@ namespace CompraVendaApi.Migrations
                 name: "Produtos",
                 columns: table => new
                 {
-                    product_id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    product_id = table.Column<int>(type: "int", nullable: false),
                     codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     codigo_barra = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -194,12 +213,9 @@ namespace CompraVendaApi.Migrations
                 name: "ProdutoBundles",
                 columns: table => new
                 {
-                    product_id_bundle = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    product_id_bundle = table.Column<int>(type: "int", nullable: false),
                     product_id_bundle_include = table.Column<int>(type: "int", nullable: false),
                     product_id = table.Column<int>(type: "int", nullable: false),
-                    codigo_bundle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    descricao_bundle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     quantidade = table.Column<int>(type: "int", nullable: false),
                     criado_data = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -219,6 +235,11 @@ namespace CompraVendaApi.Migrations
                         principalColumn: "product_id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Documentos_documento_parent_id",
+                table: "Documentos",
+                column: "documento_parent_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProdutoBundles_product_id",
@@ -250,6 +271,9 @@ namespace CompraVendaApi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Armazems");
+
+            migrationBuilder.DropTable(
+                name: "Documentos");
 
             migrationBuilder.DropTable(
                 name: "Localizacaos");

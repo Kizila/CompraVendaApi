@@ -3,20 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
 {
-    public class Armazem
+    public class Documento
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int armazem_id { get; set; }
+        public int documento_id { get; set; }
+
+        public int? documento_parent_id { get; set; }
+        
+        public Documento? documento_parent { get; set; }
 
         public string codigo { get; set; }
 
-        public string descricao { get; set; }
+        public string designacao { get; set; }
 
-        public int ordem { get; set; }
+        public string? notas { get; set; }
 
-        public bool vende { get; set; }
-
-        public bool activo { get; set; } 
+        public bool activo { get; set; }
 
         public string criado_user { get; set; }
 
@@ -27,5 +29,8 @@ namespace CompraVendaApi.Models
         public DateTime atualizado_data { get; set; }
 
         public bool apagado { get; set; }
+
+        public List<Documento?> documento_parents { get; set; }
+
     }
 }

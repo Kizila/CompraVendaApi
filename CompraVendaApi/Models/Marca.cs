@@ -5,7 +5,7 @@ namespace CompraVendaApi.Models
 {
     public class Marca
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int marca_id { get; set; }
 
         public string titulo { get; set; }
