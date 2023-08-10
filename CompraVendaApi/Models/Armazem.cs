@@ -8,6 +8,8 @@ namespace CompraVendaApi.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int armazem_id { get; set; }
 
+        public int loja_id { get; set; }
+
         public string codigo { get; set; }
 
         public string descricao { get; set; }

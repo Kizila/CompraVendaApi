@@ -3,21 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
 {
-    public class CentroCusto
+    public class Produto_Numeros_Serie
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int centro_custo_id { get; set; }
-
+        public int produto_numero_serie_id { get; set; }
+        
         public int loja_id { get; set; }
+        
+        [MaxLength(500)]
+        public string numero_serie { get; set; }
+        
+        public int produto_id { get; set; }
 
-        public int? centro_custo_parent_id { get; set; }
-        public CentroCusto? centro_custo_parent { get; set; }
+        public int origem_id { get; set; }
+        
+        public int origem_documento_id { get; set; }
 
-        public string codigo { get; set; }
-
-        public string designacao { get; set; }
-
-        public string? notas { get; set; }
+        public bool activo { get; set; } = true;
 
         public string criado_user { get; set; }
 
@@ -26,12 +28,7 @@ namespace CompraVendaApi.Models
         public string atualizado_user { get; set; }
 
         public DateTime atualizado_data { get; set; }
-
-        public bool activo { get; set; } = true;
-
         public bool apagado { get; set; }
-
-        public List<CentroCusto>? centro_custo_parents { get; set; }
         
     }
 }

@@ -10,6 +10,8 @@ namespace CompraVendaApi.Models
 
         public Nullable<int> localizacao_parent { get; set; }
 
+        public int loja_id { get; set; }
+
         public string codigo { get; set; }
 
         public string titulo { get; set; }

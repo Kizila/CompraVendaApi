@@ -11,6 +11,8 @@ namespace CompraVendaApi.Models
 
         public int documento_id { get; set; }
 
+        public int loja_id { get; set; }
+
         public int armazem_id { get; set; }
 
         public int fornecedor_id { get; set; }
