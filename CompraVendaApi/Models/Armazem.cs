@@ -27,5 +27,7 @@ namespace CompraVendaApi.Models
         public DateTime atualizado_data { get; set; }
 
         public bool apagado { get; set; }
+
+        public List<NivelStock>? nivelStocks { get; set; }
     }
 }

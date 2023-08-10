@@ -3,14 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
 {
-    public class Apresentacao
+    public class NivelStock
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int apresentacao_id { get; set; }
 
-        public string titulo { get; set; }
+        public int nivel_stock_id { get; set; }
 
-        public string? descricao { get; set; }
+        public int armazem_id { get; set; }
+
+        public Armazem? Armazem { get; set; }
+
+        public int quantidade { get; set; }
+
+        public int quantidade_bundle { get; set; }
 
         public string criado_user { get; set; }
 
@@ -20,11 +25,8 @@ namespace CompraVendaApi.Models
 
         public DateTime atualizado_data { get; set; }
 
-        public bool activo { get; set; }
+        public bool activo { get; set; } = true;
 
         public bool apagado { get; set; }
-
-        public List<Produto>? Produtos { get; set; }
-        
     }
 }

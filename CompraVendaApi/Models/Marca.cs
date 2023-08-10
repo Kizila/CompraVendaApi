@@ -10,7 +10,7 @@ namespace CompraVendaApi.Models
 
         public string titulo { get; set; }
 
-        public string descricao { get; set; }
+        public string? descricao { get; set; }
 
         public DateTime criado_data { get; set; }
 

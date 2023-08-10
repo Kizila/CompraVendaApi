@@ -565,6 +565,139 @@ namespace CompraVendaApi.Data
                     });
 
 
+                if (!context.CentroCustos.Any())
+                    context.CentroCustos.AddRange(new List<CentroCusto> {
+                    new CentroCusto
+                    {
+                        centro_custo_id = 1,
+                        codigo = "CC001",
+                        designacao = "Departamento Financeiro",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 2,
+                        codigo = "CC002",
+                        designacao = "Departamento de Marketing",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 3,
+                        codigo = "CC003",
+                        designacao = "Departamento de Vendas",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 4,
+                        codigo = "CC004",
+                        designacao = "Departamento de Desenvolvimento",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 5,
+                        codigo = "CC005",
+                        designacao = "Departamento de Recursos Humanos",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 6,
+                        codigo = "CC006",
+                        designacao = "Departamento de Logística",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 7,
+                        codigo = "CC007",
+                        designacao = "Departamento de Atendimento ao Cliente",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 8,
+                        codigo = "CC008",
+                        designacao = "Departamento de Qualidade",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 9,
+                        codigo = "CC009",
+                        designacao = "Departamento de Pesquisa e Desenvolvimento",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    },
+
+                    new CentroCusto
+                    {
+                        centro_custo_id = 10,
+                        codigo = "CC010",
+                        designacao = "Departamento de Suporte Técnico",
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    }
+                });
+
                 context.SaveChanges();
                 
             }

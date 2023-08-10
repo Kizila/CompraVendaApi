@@ -3,14 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
 {
-    public class Apresentacao
+    public class CentroCusto
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int apresentacao_id { get; set; }
+        public int centro_custo_id { get; set; }
 
-        public string titulo { get; set; }
+        public int? centro_custo_parent_id { get; set; }
+        public CentroCusto? centro_custo_parent { get; set; }
 
-        public string? descricao { get; set; }
+        public string codigo { get; set; }
+
+        public string designacao { get; set; }
+
+        public string? notas { get; set; }
 
         public string criado_user { get; set; }
 
@@ -20,11 +25,11 @@ namespace CompraVendaApi.Models
 
         public DateTime atualizado_data { get; set; }
 
-        public bool activo { get; set; }
+        public bool activo { get; set; } = true;
 
         public bool apagado { get; set; }
 
-        public List<Produto>? Produtos { get; set; }
+        public List<CentroCusto>? centro_custo_parents { get; set; }
         
     }
 }
