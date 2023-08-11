@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Administracao\" />
+    <Folder Include="Controllers\Comercial\" />
     <Folder Include="Data\Base\" />
     <Folder Include="Migrations\" />
     <Folder Include="Models\Comercial\" />

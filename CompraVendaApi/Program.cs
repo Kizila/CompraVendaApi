@@ -13,6 +13,7 @@ builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IImpostoService, ImpostoService>();
 builder.Services.AddScoped<IMarcaService, MarcaService>();
+builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 
 
 builder.Services.AddControllers();

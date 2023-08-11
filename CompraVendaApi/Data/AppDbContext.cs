@@ -12,6 +12,7 @@ namespace CompraVendaApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Apresentacao>().Property(b=> b.titulo).IsRequired();
 
             modelBuilder.Entity<Documento>().Property(b => b.codigo).IsRequired();
@@ -43,7 +44,12 @@ namespace CompraVendaApi.Data
             
             modelBuilder.Entity<CentroCusto>().HasOne(m => m.centro_custo_parent).WithMany(am => am.centro_custo_parents).HasForeignKey(m => m.centro_custo_parent_id);
 
-            modelBuilder.Entity<NivelStock>().HasOne(m => m.Armazem).WithMany(am => am.nivelStocks).HasForeignKey(m => m.armazem_id);
+            modelBuilder.Entity<Produto_Nivel_Stock>().HasOne(m => m.Armazem).WithMany(am => am.produto_nivel_stocks).HasForeignKey(m => m.armazem_id);
+            modelBuilder.Entity<Produto_Nivel_Stock>().HasOne(m => m.produto).WithMany(am => am.produto_nivel_stocks).HasForeignKey(m => m.produto_id);
+
+            modelBuilder.Entity<Fornecedor>().HasOne(m => m.entidade).WithMany(am => am.fornecedores).HasForeignKey(m => m.entidade_id);
+            modelBuilder.Entity<Fornecedor>().HasOne(m => m.imposto).WithMany(am => am.fornecedores).HasForeignKey(m => m.imposto_id);
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -58,7 +64,7 @@ namespace CompraVendaApi.Data
 
         public DbSet<CentroCusto> CentroCustos { get; set; }
 
-        public DbSet<NivelStock>  nivelStocks { get; set; }
+        public DbSet<Produto_Nivel_Stock>  ProdutoNivelStocks { get; set; }
 
         public DbSet<Imposto> Impostos { get; set; }
 
@@ -69,6 +75,10 @@ namespace CompraVendaApi.Data
         public DbSet<Produto> Produtos { get; set; }
 
         public DbSet<ProdutoBundle> ProdutoBundles { get; set; }
+
+        public DbSet<Entidade> Entidades { get; set; }
+
+        public DbSet<Fornecedor> Fornecedores { get; set; }
 
     }
 }

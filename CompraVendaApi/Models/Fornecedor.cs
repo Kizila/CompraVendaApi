@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
@@ -10,17 +11,22 @@ namespace CompraVendaApi.Models
 
         public int entidade_id { get; set; }
 
+        public Entidade? entidade { get; set; }
+        
         public int? imposto_id { get; set; }
 
-        public int? tipo_pagemento_id { get; set; }
+        [JsonIgnore]
+        public Imposto? imposto { get; set; }
         
+        public int? condicoes_pagemento_id { get; set; }
+
         public string codigo { get; set; }
         
-        public decimal saldo_actual { get; set; }
+        public decimal? saldo_actual { get; set; }
 
-        public decimal saldo_limite { get; set; }
+        public decimal? saldo_limite { get; set; }
 
-        public decimal desconto { get; set; }
+        public decimal? desconto { get; set; }
 
         public string criado_user { get; set; }
 

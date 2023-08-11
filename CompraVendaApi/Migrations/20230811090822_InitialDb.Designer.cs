@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompraVendaApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230810131340_InitialDb")]
+    [Migration("20230811090822_InitialDb")]
     partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,7 +50,6 @@ namespace CompraVendaApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("descricao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titulo")
@@ -96,6 +95,9 @@ namespace CompraVendaApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("loja_id")
+                        .HasColumnType("int");
+
                     b.Property<int>("ordem")
                         .HasColumnType("int");
 
@@ -133,7 +135,6 @@ namespace CompraVendaApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("descricao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titulo")
@@ -144,6 +145,57 @@ namespace CompraVendaApi.Migrations
                     b.HasKey("categoria_id");
 
                     b.ToTable("Categorias");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.CentroCusto", b =>
+                {
+                    b.Property<int>("centro_custo_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("atualizado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("atualizado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("centro_custo_parent_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("criado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("criado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("designacao")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("loja_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("notas")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("centro_custo_id");
+
+                    b.HasIndex("centro_custo_parent_id");
+
+                    b.ToTable("CentroCustos");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
@@ -192,6 +244,124 @@ namespace CompraVendaApi.Migrations
                     b.HasIndex("documento_parent_id");
 
                     b.ToTable("Documentos");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.Entidade", b =>
+                {
+                    b.Property<int>("entidade_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("atualizado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("atualizado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("contribuinte")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime>("criado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("criado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("designacao")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("morada")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("segmento_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("telefone")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("tipo_entidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("entidade_id");
+
+                    b.ToTable("Entidades");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.Fornecedor", b =>
+                {
+                    b.Property<int>("fornecedor_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("atualizado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("atualizado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("condicoes_pagemento_id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("criado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("criado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("desconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("entidade_id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("imposto_id")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("saldo_actual")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("saldo_limite")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("fornecedor_id");
+
+                    b.HasIndex("entidade_id");
+
+                    b.HasIndex("imposto_id");
+
+                    b.ToTable("Fornecedores");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Imposto", b =>
@@ -274,6 +444,9 @@ namespace CompraVendaApi.Migrations
                     b.Property<int?>("localizacao_parent")
                         .HasColumnType("int");
 
+                    b.Property<int>("loja_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("titulo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -309,7 +482,6 @@ namespace CompraVendaApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("descricao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("titulo")
@@ -401,6 +573,52 @@ namespace CompraVendaApi.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.Produto_Nivel_Stock", b =>
+                {
+                    b.Property<int>("nivel_stock_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("apagado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("armazem_id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("atualizado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("atualizado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("criado_data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("criado_user")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("produto_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantidade_bundle")
+                        .HasColumnType("int");
+
+                    b.HasKey("nivel_stock_id");
+
+                    b.HasIndex("armazem_id");
+
+                    b.HasIndex("produto_id");
+
+                    b.ToTable("ProdutoNivelStocks");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.ProdutoBundle", b =>
                 {
                     b.Property<int>("product_id_bundle")
@@ -445,6 +663,15 @@ namespace CompraVendaApi.Migrations
                     b.ToTable("ProdutoBundles");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.CentroCusto", b =>
+                {
+                    b.HasOne("CompraVendaApi.Models.CentroCusto", "centro_custo_parent")
+                        .WithMany("centro_custo_parents")
+                        .HasForeignKey("centro_custo_parent_id");
+
+                    b.Navigation("centro_custo_parent");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
                 {
                     b.HasOne("CompraVendaApi.Models.Documento", "documento_parent")
@@ -452,6 +679,23 @@ namespace CompraVendaApi.Migrations
                         .HasForeignKey("documento_parent_id");
 
                     b.Navigation("documento_parent");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.Fornecedor", b =>
+                {
+                    b.HasOne("CompraVendaApi.Models.Entidade", "entidade")
+                        .WithMany("fornecedores")
+                        .HasForeignKey("entidade_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CompraVendaApi.Models.Imposto", "imposto")
+                        .WithMany("fornecedores")
+                        .HasForeignKey("imposto_id");
+
+                    b.Navigation("entidade");
+
+                    b.Navigation("imposto");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Produto", b =>
@@ -489,6 +733,25 @@ namespace CompraVendaApi.Migrations
                     b.Navigation("Marca");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.Produto_Nivel_Stock", b =>
+                {
+                    b.HasOne("CompraVendaApi.Models.Armazem", "Armazem")
+                        .WithMany("produto_nivel_stocks")
+                        .HasForeignKey("armazem_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CompraVendaApi.Models.Produto", "produto")
+                        .WithMany("produto_nivel_stocks")
+                        .HasForeignKey("produto_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Armazem");
+
+                    b.Navigation("produto");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.ProdutoBundle", b =>
                 {
                     b.HasOne("CompraVendaApi.Models.Produto", "Produto")
@@ -505,9 +768,19 @@ namespace CompraVendaApi.Migrations
                     b.Navigation("Produtos");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.Armazem", b =>
+                {
+                    b.Navigation("produto_nivel_stocks");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.Categoria", b =>
                 {
                     b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("CompraVendaApi.Models.CentroCusto", b =>
+                {
+                    b.Navigation("centro_custo_parents");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Documento", b =>
@@ -515,9 +788,16 @@ namespace CompraVendaApi.Migrations
                     b.Navigation("documento_parents");
                 });
 
+            modelBuilder.Entity("CompraVendaApi.Models.Entidade", b =>
+                {
+                    b.Navigation("fornecedores");
+                });
+
             modelBuilder.Entity("CompraVendaApi.Models.Imposto", b =>
                 {
                     b.Navigation("Produtos");
+
+                    b.Navigation("fornecedores");
                 });
 
             modelBuilder.Entity("CompraVendaApi.Models.Marca", b =>
@@ -528,6 +808,8 @@ namespace CompraVendaApi.Migrations
             modelBuilder.Entity("CompraVendaApi.Models.Produto", b =>
                 {
                     b.Navigation("product_bundle");
+
+                    b.Navigation("produto_nivel_stocks");
                 });
 #pragma warning restore 612, 618
         }

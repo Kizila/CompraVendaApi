@@ -28,6 +28,7 @@ namespace CompraVendaApi.Models
 
         public bool apagado { get; set; }
 
-        public List<Produto> Produtos { get; set; } = new List<Produto>();
+        public List<Produto>? Produtos { get; set; }
+        public List<Fornecedor>? fornecedores { get; set; }
     }
 }

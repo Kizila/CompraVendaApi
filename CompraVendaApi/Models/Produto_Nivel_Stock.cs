@@ -3,11 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
 {
-    public class NivelStock
+    public class Produto_Nivel_Stock
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
 
         public int nivel_stock_id { get; set; }
+
+        public int produto_id { get; set; }
+
+        public Produto? produto { get; set; }
 
         public int armazem_id { get; set; }
 

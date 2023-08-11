@@ -1,17 +1,18 @@
-﻿using CompraVendaApi.Models;
+﻿using CompraVendaApi.Data.Services;
+using CompraVendaApi.Models;
 
 namespace CompraVendaApi.Data
 {
     public class AppDbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static async void Seed(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
                 
                 context.Database.EnsureCreated();
-                
+
                 if (!context.Apresentacaos.Any())
                 {
                     context.Apresentacaos.AddRange(new List<Apresentacao>()
@@ -697,9 +698,44 @@ namespace CompraVendaApi.Data
                         apagado = false
                     }
                 });
-
                 context.SaveChanges();
-                
+
+                if (!context.Fornecedores.Any())
+                {
+                    var fornecedor = new FornecedorService(context);
+                    var novoFornecedor = new Fornecedor() { 
+                        entidade = new Entidade()
+                        {
+                            tipo_entidade = 1,
+                            codigo = "001",
+                            designacao = "Hypermecado Kero",
+                            contribuinte = "48394y53k",
+                            morada = "1 avenidade do congresso mpla",
+                            telefone = "923 000 000",
+                            email = "hyper.mercado@kero.com",
+                            criado_user = "Admin",
+                            criado_data = DateTime.Now,
+                            atualizado_user = "Admin",
+                            atualizado_data = DateTime.Now,
+                            activo = true,
+                            apagado = false
+                        },
+                        imposto_id = 1,
+                        condicoes_pagemento_id = 1,
+                        codigo = "001",
+                        saldo_actual = null,
+                        saldo_limite = null,
+                        desconto = null,
+                        criado_user = "Admin",
+                        criado_data = DateTime.Now,
+                        atualizado_user = "Admin",
+                        atualizado_data = DateTime.Now,
+                        activo = true,
+                        apagado = false
+                    };
+
+                    await fornecedor.Save(novoFornecedor);
+                }
             }
         }
     }

@@ -30,6 +30,6 @@ namespace CompraVendaApi.Models
 
         public bool apagado { get; set; }
 
-        public List<NivelStock>? nivelStocks { get; set; }
+        public List<Produto_Nivel_Stock>? produto_nivel_stocks { get; set; }
     }
 }

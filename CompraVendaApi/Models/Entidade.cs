@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompraVendaApi.Models
@@ -8,8 +10,10 @@ namespace CompraVendaApi.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int entidade_id { get; set; }
 
-        public int segmento_id { get; set; }
+        public int? segmento_id { get; set; }
 
+        public int tipo_entidade { get; set; }
+        
         [StringLength(300)]
         public string codigo { get; set; }
 
@@ -20,12 +24,12 @@ namespace CompraVendaApi.Models
         public string contribuinte { get; set; }
 
         [StringLength(500)]
-        public string morada { get; set; }
+        public string? morada { get; set; }
         
         [StringLength(100)]
-        public string telefone { get; set; }
+        public string? telefone { get; set; }
         
-        public string email { get; set; }
+        public string? email { get; set; }
 
         public string criado_user { get; set; }
 
@@ -39,6 +43,6 @@ namespace CompraVendaApi.Models
 
         public bool apagado { get; set; }
 
-        
+        public List<Fornecedor>? fornecedores { get; set; }
     }
 }
