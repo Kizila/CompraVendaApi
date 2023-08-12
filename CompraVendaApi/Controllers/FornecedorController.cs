@@ -49,7 +49,24 @@ namespace CompraVendaApi.Controllers
             }
             catch (Exception ex)
             {
-                return FormatedError<Produto>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
+                return FormatedError<Fornecedor>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("Atualizar")]
+        public async Task<IActionResult> Atualizar(Fornecedor item)
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            try
+            {
+                var data = await service.Update(item);
+
+                return await FuncToCreated(data, watch.ElapsedMilliseconds);
+            }
+            catch (Exception ex)
+            {
+                return FormatedError<Fornecedor>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
             }
         }
     }

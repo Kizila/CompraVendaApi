@@ -107,7 +107,35 @@ namespace CompraVendaApi.Data.Services
             }
 
 
+            var entidade = await context.Entidades.FirstOrDefaultAsync(x => x.entidade_id == item.entidade_id);
+
+            entidade.segmento_id = item.entidade.segmento_id;
+            entidade.tipo_entidade = item.entidade.tipo_entidade;
+            entidade.codigo = item.codigo;
+            entidade.designacao = item.entidade.designacao;
+            entidade.contribuinte = item.entidade.contribuinte;
+            entidade.morada = item.entidade.morada;
+            entidade.telefone = item.entidade.telefone;
+            entidade.email = item.entidade.email;
+            entidade.atualizado_data = item.atualizado_data;
+            entidade.atualizado_user = item.atualizado_user;
+            
+            existing.imposto_id = item.imposto_id;
+            existing.condicoes_pagemento_id = item.condicoes_pagemento_id;
+            existing.codigo = item.codigo;
+            existing.saldo_actual = item.saldo_actual;
+            existing.saldo_limite = item.saldo_limite;
+            existing.desconto = item.desconto;
+
+            existing.activo = item.activo;
+            existing.atualizado_user = item.atualizado_user;
+            existing.atualizado_data = item.atualizado_data;
+
+            context.Entry(entidade).State = EntityState.Modified;
+            context.Entry(existing).State = EntityState.Modified;
+
             await context.SaveChangesAsync();
+
             return item;
         }
 
