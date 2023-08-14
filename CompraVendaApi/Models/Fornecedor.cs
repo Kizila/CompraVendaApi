@@ -40,6 +40,7 @@ namespace CompraVendaApi.Models
 
         public bool apagado { get; set; }
 
-        
+        public List<Fornecedor_Encomenda>? fornecedor_encomendas { get; set; }
+
     }
 }

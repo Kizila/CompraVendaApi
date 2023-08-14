@@ -11,15 +11,21 @@ namespace CompraVendaApi.Models
 
         public int documento_id { get; set; }
 
+        public Documento? documento { get; set; }
+
         public int loja_id { get; set; }
 
         public int armazem_id { get; set; }
 
+        public Armazem? armazem { get; set; }
+
         public int fornecedor_id { get; set; }
+
+        public Fornecedor? fornecedor { get; set; }
 
         public int moeda_id { get; set; }
 
-        public int? tipo_pagemento_id { get; set; }
+        //public int? condicoes_pagemento_id { get; set; }
 
         public string documento_referencia { get; set; }
 
@@ -55,6 +61,7 @@ namespace CompraVendaApi.Models
 
         public bool apagado { get; set; }
 
-        
+        public List<Fornecedor_Encomenda_linha> fornecedor_encomenda_linhas { get; set; }
+
     }
 }

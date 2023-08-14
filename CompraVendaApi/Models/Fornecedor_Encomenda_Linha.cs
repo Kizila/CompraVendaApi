@@ -9,12 +9,22 @@ namespace CompraVendaApi.Models
 
         public int encomenda_fornecedor_linha_id { get; set; }
 
+        public int encomenda_fornecedor_id { get; set; }
+        
+        public Fornecedor_Encomenda? encomenda_fornecedor { get; set; }
+        
         public int? produto_id { get; set; }
-
+        
+        public Produto? produto { get; set; }
+        
         public int? imposto_id { get; set; }
-
+        
+        public Imposto? imposto { get; set; }
+        
         public int? apresentacao_id { get; set; }
-
+        
+        public Apresentacao? apresentacao { get; set; }
+        
         public int? qtd_apresentacao { get; set; }
         
         public decimal? preco { get; set; }
@@ -25,7 +35,7 @@ namespace CompraVendaApi.Models
         
         public decimal? desconto2 { get; set; }
 
-        public decimal? imposto { get; set; }
+        public decimal? impostoValor { get; set; }
 
         public decimal? total_desconto { get; set; }
 

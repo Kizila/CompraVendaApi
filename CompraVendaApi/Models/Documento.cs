@@ -32,5 +32,7 @@ namespace CompraVendaApi.Models
 
         public List<Documento?> documento_parents { get; set; }
 
+        public List<Fornecedor_Encomenda?> fornecedor_encomendas { get; set; }
+
     }
 }

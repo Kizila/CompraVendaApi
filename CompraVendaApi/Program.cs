@@ -10,10 +10,12 @@ builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer(builder.Config
 
 builder.Services.AddScoped<IApresentacaoService, ApresentacaoService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IArmazemService, ArmazemService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IImpostoService, ImpostoService>();
 builder.Services.AddScoped<IMarcaService, MarcaService>();
 builder.Services.AddScoped<IFornecedorService, FornecedorService>();
+builder.Services.AddScoped<IFornecedorEncomendaService, FornecedorEncomendaService>();
 
 
 builder.Services.AddControllers();

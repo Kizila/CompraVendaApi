@@ -13,7 +13,48 @@ namespace CompraVendaApi.Data.Services
         public FornecedorService(AppDbContext context)  {
             this.context = context;
         }
+        public async Task<dynamic> GetFitrar(string campo, string valor)
+        {
+            var request =  context.Fornecedores.Select(gh => new
+            {
+                fornecedor_id = gh.fornecedor_id,
+                entidade_id = gh.entidade_id,
+                entidade = gh.entidade,
+                imposto_id = gh.imposto_id,
+                imposto = gh.imposto.percentagem,
+                condicoes_pagemento_id = gh.condicoes_pagemento_id,
+                codigo = gh.codigo,
+                saldo_actual = gh.saldo_actual,
+                saldo_limite = gh.saldo_limite,
+                desconto = gh.desconto,
+                activo = gh.activo,
+                criado_user = gh.criado_user,
+                criado_data = gh.criado_data,
+                atualizado_data = gh.atualizado_data,
+                atualizado_user = gh.atualizado_user,
+                apagado = gh.apagado,
+            });
 
+            if(!String.IsNullOrEmpty(valor) && !String.IsNullOrWhiteSpace(valor))
+            {
+                switch (campo)
+                {
+                    case "codigo":
+                        request = request.Where(x => x.codigo.Contains(valor));
+                        break;
+
+                    case "designacao":
+                        request = request.Where(x => x.entidade.designacao.Contains(valor));
+                        break;
+                    case "contribuinte":
+                        request = request.Where(x => x.entidade.contribuinte.Contains(valor));
+                        break;
+                }
+
+            }
+
+            return await request.ToListAsync();
+        }
         public async Task<dynamic> GetAllAsync()
         {
             var request = context.Fornecedores.Select(gh => new 
@@ -165,5 +206,7 @@ namespace CompraVendaApi.Data.Services
             }
             return !string.IsNullOrWhiteSpace(last) ? int.Parse(last) : (0);
         }
+
+   
     }
 }

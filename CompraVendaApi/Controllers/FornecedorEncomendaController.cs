@@ -10,11 +10,11 @@ namespace CompraVendaApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FornecedorController : BaseController
+    public class FornecedorEncomendaController : BaseController
     {
-        public readonly IFornecedorService service;
+        public readonly IFornecedorEncomendaService service;
 
-        public FornecedorController(IFornecedorService service)
+        public FornecedorEncomendaController(IFornecedorEncomendaService service)
         {
             this.service = service;
         }
@@ -27,14 +27,7 @@ namespace CompraVendaApi.Controllers
 
             return Content(JsonConvert.SerializeObject(data), "application/json");
         }
-        [HttpGet]
-        [Route("GetFitrar")]
-        public async Task<ContentResult> GetFitrar(string campo, string? valor)
-        {
-            var data = await service.GetFitrar(campo,valor ?? "");
 
-            return Content(JsonConvert.SerializeObject(data), "application/json");
-        }
         [HttpGet]
         [Route("MostrarActivos")]
         public async Task<ContentResult> MostrarActivos()
@@ -45,7 +38,7 @@ namespace CompraVendaApi.Controllers
         
         [HttpPost]
         [Route("Guardar")]
-        public async Task<IActionResult> Guardar(Fornecedor item)
+        public async Task<IActionResult> Guardar(Fornecedor_Encomenda item)
         {
             Stopwatch watch = Stopwatch.StartNew();
             try
@@ -56,13 +49,13 @@ namespace CompraVendaApi.Controllers
             }
             catch (Exception ex)
             {
-                return FormatedError<Fornecedor>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
+                return FormatedError<Fornecedor_Encomenda>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
             }
         }
 
         [HttpPost]
         [Route("Atualizar")]
-        public async Task<IActionResult> Atualizar(Fornecedor item)
+        public async Task<IActionResult> Atualizar(Fornecedor_Encomenda item)
         {
             Stopwatch watch = Stopwatch.StartNew();
             try
@@ -73,7 +66,7 @@ namespace CompraVendaApi.Controllers
             }
             catch (Exception ex)
             {
-                return FormatedError<Fornecedor>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
+                return FormatedError<Fornecedor_Encomenda>(this.GetType().Name, watch, System.Net.HttpStatusCode.ExpectationFailed, Classes.Enums.TagCode.OtherException, ex.Message);
             }
         }
     }

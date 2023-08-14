@@ -62,5 +62,8 @@ namespace CompraVendaApi.Models
         public bool apagado { get; set; }
 
         public List<Produto_Nivel_Stock>? produto_nivel_stocks { get; set; }
+
+        public List<Fornecedor_Encomenda_linha>? fornecedor_encomenda_linhas { get; set; }
+
     }
 }

@@ -50,6 +50,15 @@ namespace CompraVendaApi.Data
             modelBuilder.Entity<Fornecedor>().HasOne(m => m.entidade).WithMany(am => am.fornecedores).HasForeignKey(m => m.entidade_id);
             modelBuilder.Entity<Fornecedor>().HasOne(m => m.imposto).WithMany(am => am.fornecedores).HasForeignKey(m => m.imposto_id);
 
+            modelBuilder.Entity<Fornecedor_Encomenda>().HasOne(m => m.documento).WithMany(am => am.fornecedor_encomendas).HasForeignKey(m => m.armazem_id);
+            modelBuilder.Entity<Fornecedor_Encomenda>().HasOne(m => m.armazem).WithMany(am => am.fornecedor_encomendas).HasForeignKey(m => m.armazem_id);
+            modelBuilder.Entity<Fornecedor_Encomenda>().HasOne(m => m.fornecedor).WithMany(am => am.fornecedor_encomendas).HasForeignKey(m => m.fornecedor_id);
+
+            modelBuilder.Entity<Fornecedor_Encomenda_linha>().HasOne(m => m.encomenda_fornecedor).WithMany(am => am.fornecedor_encomenda_linhas).HasForeignKey(m => m.encomenda_fornecedor_id);
+            modelBuilder.Entity<Fornecedor_Encomenda_linha>().HasOne(m => m.produto).WithMany(am => am.fornecedor_encomenda_linhas).HasForeignKey(m => m.produto_id);
+            modelBuilder.Entity<Fornecedor_Encomenda_linha>().HasOne(m => m.imposto).WithMany(am => am.fornecedor_encomenda_linhas).HasForeignKey(m => m.imposto_id);
+            modelBuilder.Entity<Fornecedor_Encomenda_linha>().HasOne(m => m.apresentacao).WithMany(am => am.fornecedor_encomenda_linhas).HasForeignKey(m => m.apresentacao_id);
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -79,6 +88,10 @@ namespace CompraVendaApi.Data
         public DbSet<Entidade> Entidades { get; set; }
 
         public DbSet<Fornecedor> Fornecedores { get; set; }
+
+        public DbSet<Fornecedor_Encomenda> Fornecedor_Encomendas { get; set; }
+
+        public DbSet<Fornecedor_Encomenda_linha> Fornecedor_Encomenda_Linhas { get; set; }
 
     }
 }

@@ -30,5 +30,6 @@ namespace CompraVendaApi.Models
 
         public List<Produto>? Produtos { get; set; }
         public List<Fornecedor>? fornecedores { get; set; }
+        public List<Fornecedor_Encomenda_linha>? fornecedor_encomenda_linhas { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace CompraVendaApi.Data.Services
 
         Task<Fornecedor> GetByIDAsync(int id);
 
+        Task<dynamic> GetFitrar(string campo, string valor);
+
         Task<Fornecedor> Save(Fornecedor item);
 
         Task<Fornecedor> Update(Fornecedor item);
