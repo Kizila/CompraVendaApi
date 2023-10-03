@@ -70,7 +70,15 @@ namespace CompraVendaApi.Controllers
 
             return Content(JsonConvert.SerializeObject(data), "application/json");
         }
-        
+        [HttpGet]
+        [Route("GetProductByFilter")]
+        public async Task<ContentResult> GetProductByFilter(int armazem_id, string? campo, string? valor)
+        {
+            var data = await service.GetProductByFilter(campo, valor, armazem_id);
+
+            return Content(JsonConvert.SerializeObject(data), "application/json");
+        }
+
         [HttpGet]
         [Route("BundleMostrarByProductID")]
         public async Task<ContentResult> BundleMostrarByProductID(int id)

@@ -8,6 +8,8 @@ namespace CompraVendaApi.Data.Services
 
         Task<dynamic> GetAllAsync();
 
+        Task<dynamic> GetProductByFilter(string campo, string valor, int armazen_id);
+
         Task<List<Produto>> MostrarActivos();
 
         Task<Produto> GetByIDAsync(int id);

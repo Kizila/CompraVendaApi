@@ -53,6 +53,62 @@ namespace CompraVendaApi.Data.Services
                 throw new Exception(ex.Message,ex.InnerException);
             }
         }
+        public async Task<dynamic> GetProductByFilter(string campo, string valor, int armazen_id)
+        {
+            try
+            {
+                valor = valor ?? "";
+
+                   var request = context.Produtos.Select(t => new
+                {
+                    t.product_id,
+                    t.codigo,
+                    t.codigo_barra,
+                    t.descricao,
+                    Stock = ((int?)t.produto_nivel_stocks.Where(x => x.armazem_id == armazen_id).FirstOrDefault().quantidade) ?? 0,
+                    t.preco_custo,
+                    t.imposto_id,
+                    imposto = t.Imposto.percentagem,
+                    t.marca_id,
+                    marca = t.Marca.titulo,
+                    t.categoria_id,
+                    categoria = t.Categoria.titulo,
+                    t.apresentacao_id,
+                    apresentacao = t.Apresentacao.titulo,
+                    t.preco,
+                    t.bundle,
+                    t.controla_serial_no,
+                    t.move_stock,
+                    t.tipo_artigo,
+                    t.criado_user,
+                    t.criado_data,
+                    t.atualizado_user,
+                    t.atualizado_data,
+                    t.activo,
+                    t.apagado
+                });
+
+                if(!String.IsNullOrEmpty(valor) && !String.IsNullOrWhiteSpace(valor))
+                {
+                    switch (campo)
+                    {
+                        case "codigo":
+                            request = request.Where(x => x.codigo.Contains(valor));
+                            break;
+                        case "descricao":
+                            request = request.Where(x => x.descricao.Contains(valor));
+                            break;
+                    }
+                }
+
+                return await request.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+
         public async Task<List<Produto>> MostrarActivos()
         {
             return await context.Produtos.Where(x=>x.activo).ToListAsync();

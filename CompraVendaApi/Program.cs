@@ -29,7 +29,7 @@ var app = builder.Build();
 AppDbInitializer.Seed(app);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

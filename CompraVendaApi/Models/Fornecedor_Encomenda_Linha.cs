@@ -26,7 +26,9 @@ namespace CompraVendaApi.Models
         public Apresentacao? apresentacao { get; set; }
         
         public int? qtd_apresentacao { get; set; }
-        
+
+        public int? quantidade { get; set; }
+
         public decimal? preco { get; set; }
 
         public decimal? desconto_cabecalho { get; set; }
